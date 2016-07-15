@@ -16,10 +16,8 @@ static int read_ulli(char *str, ulli * res)
     if (ERANGE == errno) {
         if (ULLONG_MAX == *res) {
             return -2;
-        } else if (-ULLONG_MAX == *res) {
-            return -3;
         } else {
-            return -4;
+            return -3;
         }
     }
 
@@ -30,8 +28,7 @@ static int read_ulli(char *str, ulli * res)
 case 0: goto num ## goodend; \
 case -1: fprintf(stderr, "%s: %s invalid input\n", argv[0], str); goto num ## end; \
 case -2: fprintf(stderr, "%s: %s is bigger than positive infinity\n", argv[0], str); goto num ## end; \
-case -3: fprintf(stderr, "%s: %s is bigger than negative infinity\n", argv[0], str); goto num ## end; \
-case -4: fprintf(stderr, "%s: %s is bigger than Jesus\n", argv[0], str); goto num ## end; \
+default: fprintf(stderr, "%s: %s is bigger than Jesus\n", argv[0], str); goto num ## end; \
       } } while (0); num ## end: continue; num ## goodend:
 
 int main(int argc, char *argv[])
